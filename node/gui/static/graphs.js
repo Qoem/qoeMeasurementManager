@@ -2,12 +2,7 @@ function request_graphing_data(buffer) {
     $.ajax({
         url: buffer
     }).success(function(data) {
-        // $.plot($('#my_graph'), [data]);
-        alert(data);
         $.plot($('#my_graph'), [data['data']]);
-        // for (metric in data) {
-        //     $.plot($("#" + buffer + '-' + metric), [ data[metric] ]);
-        // }
     });
 
 }

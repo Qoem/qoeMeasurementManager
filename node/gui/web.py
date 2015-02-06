@@ -18,6 +18,7 @@ def homepage():
 @app.route('/data')
 def return_graphing_data():
     get_graphing_data()
+    print str(graphing_data)
     return jsonify({'data': graphing_data})
 
 def get_graphing_data():
@@ -28,7 +29,7 @@ def get_graphing_data():
     cursor = gets.find()
     temp_array = []
     for element in cursor:
-        temp_array.append((element['time'], str(element['bandwidth'])))
+        temp_array.append((element['time'], str(element['bitrate'])))
     global graphing_data
     graphing_data = temp_array
     connection.close()
@@ -48,7 +49,7 @@ class webserver_thread(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
-        app.run()
+        app.run(host="0.0.0.0", port=8080)
 
 webserver = webserver_thread()
 webserver.start()
